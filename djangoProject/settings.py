@@ -25,8 +25,7 @@ SECRET_KEY = 'd6#f#ji6h-_@lwo+k1fepq*lxb%pqen)rd!y#kjg666!21v1&4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*',]
 
 # Application definition
 
@@ -38,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -120,3 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+SITE_ID=1
+LOGIN_REDIRECT_URL='/'
+AUTHENTICATION_BACKENDS=(
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)

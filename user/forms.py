@@ -14,3 +14,15 @@ class DiaryForm(forms.ModelForm):
         widgets={
             'ddate':DateInput(),
         }
+
+
+class ContactForm(forms.Form):
+    CITY=[
+        ['Sh','Shanghai'],
+        ['Bj','Beijing'],
+    ]
+    user_name=forms.CharField(max_length=10,initial='nick')
+    user_city=forms.ChoiceField(choices=CITY)
+    user_school=forms.BooleanField(required=False)
+    user_email=forms.EmailField()
+    user_message=forms.CharField(widget=forms.Textarea)

@@ -6,6 +6,7 @@ from . import forms,models
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import HttpResponseRedirect
+from django.core.mail import EmailMessage
 # Create your views here.
 
 
@@ -76,3 +77,32 @@ def posting(request):
         post_form=forms.DiaryForm()
         messages.add_message(request,messages.INFO,'add some thing')
     return render(request,'user/posting.html',locals())
+
+def contact(request):
+    if request.method=='POST':
+        form=forms.ContactForm(request.POST)
+        if form.is_valid():
+            user_name=form.cleaned_data['user_name']
+            user_city=form.cleaned_data['user_city']
+            user_school=form.cleaned_data['user_school']
+            user_email=form.cleaned_data['user_email']
+            user_message=form.cleaned_data['user_message']
+            mail_body='''
+            name:{}
+            city:{}
+            school:{}
+            advice:{}
+            
+            '''.format(user_name,user_city,user_school,user_message)
+            email=EmailMessage('advice from net',
+                               mail_body,
+                               user_email,
+                               ['2975684744@qq.com'],
+                               )
+            email.send()
+            messages.add_message(request,messages.INFO,'success')
+        else:
+            messages.add_message(request,messages.INFO,'failed')
+    else:
+        form=forms.ContactForm()
+    return render(request,'user/contact.html',locals())

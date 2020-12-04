@@ -1,0 +1,15 @@
+{% extends 'user/base.html' %}
+{% block title %}
+contact
+{% endblock %}
+{% block content %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+
+<form action="." method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="submit">
+</form>
+{% endblock %}
