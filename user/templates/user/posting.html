@@ -1,0 +1,18 @@
+{% extends 'user/base.html' %}
+{% block title %}
+posting
+
+{% endblock %}
+{% block content %}
+{% for message in messages %}
+    <h1>{{ message }}</h1>
+{% endfor %}
+    <form name='my form' action="." method='POST'>
+    {% csrf_token %}
+        <table>
+    {{ post_form.as_table }}
+        </table>
+    <input type="submit" value="submit">
+    <input type="reset" value="reset">
+    </form>
+{% endblock %}

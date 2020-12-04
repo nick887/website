@@ -1,0 +1,9 @@
+{% extends 'user/base.html' %}
+{% block title %}
+userinfo
+{% endblock %}
+{% block content %}
+    {{ userinfo.user.username | upper }} </br>
+    {{ userinfo.male | yesno:"man,woman"}} </br>
+    {{ userinfo.website }} </br>
+{% endblock %}

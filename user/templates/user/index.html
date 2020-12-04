@@ -1,0 +1,27 @@
+{% extends 'user/base.html' %}
+{% block title %}
+index
+{% endblock %}
+{% block content %}
+    {% for message in messages %}
+    <h1>{{ message }}</h1>
+    {% endfor %}
+
+{% if username %}
+    <h1>hello {{ username }}</h1>
+    <h1><a href="{% url 'user:logout' %}">logout</a> </h1>
+    <h1><a href="{% url 'user:userinfo' %}">userinfo</a> </h1>
+    <h1><a href="{% url 'user:posting' %}">posting</a> </h1>
+{% else %}
+    <h1><a href="{% url 'user:login' %}">login</a></h1>
+{% endif %}
+    {% for diary in diaries %}
+        {{ diary.ddate }}<br/>
+        {{ diary.note }}<br/>
+        {% empty %}
+        <h1>login</h1>
+    {% endfor %}
+
+
+
+{% endblock %}

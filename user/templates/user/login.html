@@ -1,0 +1,15 @@
+{% extends 'user/base.html' %}
+{% block title %}
+login
+{% endblock %}
+{% block content %}
+    {% for message in messages %}
+    <h1>{{ message }}</h1>
+    {% endfor %}
+
+<form action="." method="post">
+{% csrf_token %}
+{{ login_form.as_p }}
+<input value="submit" type="submit">
+</form>
+{% endblock %}
